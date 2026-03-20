@@ -85,7 +85,7 @@ const Doctrine = () => (
         </div>
         <div className="space-y-3">
           {antiPatterns.map((ap, i) => (
-            <div key={i} className="flex gap-3 items-start">
+            <div key={i} className="flex gap-3 items-start -mx-2 px-2 py-1.5 rounded transition-colors hover:bg-surface-elevated/50">
               <span className="text-destructive font-mono text-xs mt-0.5">✕</span>
               <p className="text-body-custom text-sm leading-relaxed">{ap}</p>
             </div>

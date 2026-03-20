@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Crosshair, PocketKnife, Flashlight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 import SectionWrapper from "./SectionWrapper";
+import KitDetail from "./KitDetail";
+import SwissArmyKnife from "./SwissArmyKnife";
 
 type KitId = "weapon" | "knife" | "flashlight" | null;
 
@@ -34,10 +36,21 @@ const ThreeKits = () => {
                   ? "bg-surface-elevated border-claude-blue glow-blue"
                   : "bg-surface border-border hover:border-claude-blue/50"
               }`}
-              whileHover={{ scale: 1.02, rotateY: 2 }}
-              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.02, rotateY: 3 }}
+              animate={activeKit === "weapon" ? { rotateY: 5 } : { rotateY: 0 }}
+              transition={{ duration: 0.4 }}
+              style={{ perspective: 800 }}
             >
-              <Crosshair className={`w-12 h-12 mb-4 transition-colors ${activeKit === "weapon" ? "text-claude-blue" : "text-muted-custom"}`} />
+              <Crosshair
+                className={`w-12 h-12 mb-4 transition-colors ${
+                  activeKit === "weapon" ? "text-claude-blue" : "text-muted-custom"
+                }`}
+                style={
+                  activeKit === "weapon"
+                    ? { filter: "drop-shadow(0 0 8px hsl(228 100% 71% / 0.5))" }
+                    : undefined
+                }
+              />
               <h3 className="heading-stencil text-lg text-claude-blue mb-1">THE TACTICAL WEAPON</h3>
               <p className="font-mono text-[10px] text-muted-custom">CLAUDE PRO / MAX</p>
             </motion.div>
@@ -59,7 +72,11 @@ const ThreeKits = () => {
               whileHover={{ scale: 1.02, rotateY: 2 }}
               transition={{ duration: 0.3 }}
             >
-              <PocketKnife className={`w-12 h-12 mb-4 transition-colors ${activeKit === "knife" ? "text-google-green" : "text-muted-custom"}`} />
+              <PocketKnife
+                className={`w-12 h-12 mb-4 transition-colors ${
+                  activeKit === "knife" ? "text-google-green" : "text-muted-custom"
+                }`}
+              />
               <h3 className="heading-stencil text-lg text-google-green mb-1">THE SWISS ARMY KNIFE</h3>
               <p className="font-mono text-[10px] text-muted-custom">GOOGLE AI PRO</p>
             </motion.div>
@@ -84,13 +101,32 @@ const ThreeKits = () => {
               {activeKit === "flashlight" && (
                 <motion.div
                   className="absolute inset-0 flashlight-beam"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                 />
               )}
-              <Flashlight className={`w-12 h-12 mb-4 transition-colors relative z-10 ${activeKit === "flashlight" ? "text-chatgpt-amber" : "text-muted-custom"}`} />
-              <h3 className="heading-stencil text-lg text-chatgpt-amber mb-1 relative z-10">THE FLASHLIGHT</h3>
+              <motion.div
+                animate={
+                  activeKit === "flashlight"
+                    ? { filter: "brightness(1) grayscale(0)", scale: 1.1 }
+                    : { filter: "brightness(0.35) grayscale(0.8)", scale: 1 }
+                }
+                transition={{ duration: 0.5 }}
+                className="relative z-10"
+              >
+                <Flashlight
+                  className="w-12 h-12 mb-4 text-chatgpt-amber"
+                  style={
+                    activeKit === "flashlight"
+                      ? { filter: "drop-shadow(0 0 12px hsl(43 96% 56% / 0.6))" }
+                      : undefined
+                  }
+                />
+              </motion.div>
+              <h3 className="heading-stencil text-lg text-chatgpt-amber mb-1 relative z-10">
+                THE FLASHLIGHT
+              </h3>
               <p className="font-mono text-[10px] text-muted-custom relative z-10">CHATGPT</p>
             </motion.div>
           </button>
@@ -112,7 +148,16 @@ const ThreeKits = () => {
             weightClass="Heavy — every gram justified and intentional"
             whenToDeploy="When the outcome depends on precision. Multi-step tasks where context and customization determine success. Coding sessions. Long-form writing. Complex analysis."
             operatorNote="You don't just pick this up and fire. You train with it. You customize the optics (CLAUDE.md). You choose your attachments (MCPs). You zero it to your specifications. The weapon that wins firefights because you've built a relationship with it."
-            keyTools="Claude Code, CLAUDE.md (optics zeroing), MCP servers (attachments), hooks (automated safeties), skills (training), /compact and /clear (maintenance)"
+            keyTools={[
+              "Claude Code",
+              "CLAUDE.md",
+              "MCP servers",
+              "Hooks",
+              "Skills",
+              "/compact",
+              "/clear",
+            ]}
+            isWeapon
           />
         )}
         {activeKit === "knife" && (
@@ -128,9 +173,19 @@ const ThreeKits = () => {
             weightClass="Near-zero — runs on a completely different supply line"
             whenToDeploy="When breadth beats depth. Research sweeps. Document summarization. Email drafting. Calendar management. The 30 ambient tasks that support the mission."
             operatorNote="A Swiss Army knife blade will cut rope, spread butter, and open a package. But you'd never bring it to a knife fight. It does 30 things at 70% quality — and that's the entire point. You don't configure it. It just works."
-            keyTools="Gemini 3 Pro (main blade), Jules (async coding), NotebookLM (document analysis), Deep Search (research), Workspace AI (Gmail, Docs, Sheets), 2TB storage, $10/mo Cloud credits"
+            keyTools={[
+              "Gemini 3 Pro",
+              "Jules",
+              "NotebookLM",
+              "Deep Search",
+              "Workspace AI",
+              "2TB storage",
+              "$10/mo Cloud credits",
+            ]}
             hiddenSuperpower="Every task Google handles is weight Claude doesn't carry. Every PDF NotebookLM summarizes is context not burned in Claude's window. The Swiss Army knife doesn't just complement — it actively makes the weapons more effective."
-          />
+          >
+            <SwissArmyKnife />
+          </KitDetail>
         )}
         {activeKit === "flashlight" && (
           <KitDetail
@@ -152,68 +207,5 @@ const ThreeKits = () => {
     </SectionWrapper>
   );
 };
-
-interface KitDetailProps {
-  color: string;
-  borderClass: string;
-  glowClass: string;
-  classification: string;
-  cost: string;
-  role: string;
-  strength: string;
-  weightClass: string;
-  whenToDeploy: string;
-  operatorNote: string;
-  keyTools?: string;
-  hiddenSuperpower?: string;
-  isFlashlight?: boolean;
-}
-
-const KitDetail = ({ color, borderClass, glowClass, classification, cost, role, strength, weightClass, whenToDeploy, operatorNote, keyTools, hiddenSuperpower, isFlashlight }: KitDetailProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20, height: 0 }}
-    animate={{ opacity: 1, y: 0, height: "auto" }}
-    exit={{ opacity: 0, y: 20, height: 0 }}
-    transition={{ duration: 0.5, ease: "easeOut" }}
-    className="overflow-hidden"
-  >
-    <div className={`mt-6 border rounded-lg p-6 sm:p-8 bg-background relative overflow-hidden ${borderClass} ${glowClass}`}>
-      {isFlashlight && (
-        <div className="absolute inset-0 flashlight-beam pointer-events-none" />
-      )}
-      <div className="relative z-10 grid sm:grid-cols-2 gap-4">
-        {[
-          { label: "CLASSIFICATION", value: classification },
-          { label: "COST", value: cost },
-          { label: "ROLE", value: role },
-          { label: "STRENGTH", value: strength },
-          { label: "WEIGHT CLASS", value: weightClass },
-          { label: "WHEN TO DEPLOY", value: whenToDeploy },
-        ].map(({ label, value }) => (
-          <div key={label}>
-            <p className={`label-mono text-${color} text-[10px] mb-1`}>{label}</p>
-            <p className="text-body-custom text-xs leading-relaxed">{value}</p>
-          </div>
-        ))}
-      </div>
-      <div className="relative z-10 mt-6 pt-6 border-t border-border">
-        <p className={`label-mono text-${color} text-[10px] mb-1`}>OPERATOR NOTE</p>
-        <p className="text-body-custom text-sm leading-relaxed">{operatorNote}</p>
-      </div>
-      {keyTools && (
-        <div className="relative z-10 mt-4">
-          <p className={`label-mono text-${color} text-[10px] mb-1`}>KEY TOOLS</p>
-          <p className="text-body-custom text-xs font-mono leading-relaxed">{keyTools}</p>
-        </div>
-      )}
-      {hiddenSuperpower && (
-        <div className="relative z-10 mt-4 p-4 rounded bg-surface border border-border">
-          <p className={`label-mono text-${color} text-[10px] mb-1`}>THE HIDDEN SUPERPOWER</p>
-          <p className="text-body-custom text-xs leading-relaxed">{hiddenSuperpower}</p>
-        </div>
-      )}
-    </div>
-  </motion.div>
-);
 
 export default ThreeKits;

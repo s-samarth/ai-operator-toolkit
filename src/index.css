@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 216 30% 5%;
+    --background: 214 28% 6%;
     --foreground: 210 25% 90%;
 
     --card: 215 25% 10%;
@@ -15,7 +15,7 @@
     --popover: 215 25% 10%;
     --popover-foreground: 210 25% 90%;
 
-    --primary: 25 55% 60%;
+    --primary: 24 58% 60%;
     --primary-foreground: 216 30% 5%;
 
     --secondary: 215 20% 15%;
@@ -37,26 +37,26 @@
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --copper: 25 55% 60%;
-    --copper-glow: 25 55% 60%;
+    --copper: 24 58% 60%;
+    --copper-glow: 24 58% 60%;
     --claude-blue: 228 100% 71%;
-    --google-green: 145 65% 58%;
+    --google-green: 142 71% 58%;
     --chatgpt-amber: 43 96% 56%;
     --danger: 0 84% 60%;
     --surface: 215 25% 10%;
-    --surface-elevated: 215 22% 16%;
+    --surface-elevated: 215 25% 14%;
     --text-bright: 213 33% 96%;
-    --text-body: 210 25% 85%;
+    --text-body: 210 30% 83%;
     --text-muted: 213 15% 55%;
-    --night-ops: 216 30% 5%;
+    --night-ops: 214 28% 6%;
 
     --font-heading: 'Barlow Condensed', sans-serif;
     --font-body: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    --shadow-copper: 0 0 30px -5px hsl(25 55% 60% / 0.3);
+    --shadow-copper: 0 0 30px -5px hsl(24 58% 60% / 0.3);
     --shadow-blue: 0 0 30px -5px hsl(228 100% 71% / 0.3);
-    --shadow-green: 0 0 30px -5px hsl(145 65% 58% / 0.3);
+    --shadow-green: 0 0 30px -5px hsl(142 71% 58% / 0.3);
     --shadow-amber: 0 0 30px -5px hsl(43 96% 56% / 0.3);
   }
 }
@@ -180,13 +180,68 @@
   }
 
   .flashlight-beam {
-    background: radial-gradient(
-      ellipse at top center,
-      hsl(var(--chatgpt-amber) / 0.15) 0%,
-      hsl(var(--chatgpt-amber) / 0.08) 30%,
-      hsl(var(--chatgpt-amber) / 0.02) 60%,
-      transparent 100%
+    background:
+      radial-gradient(
+        ellipse at top center,
+        hsl(var(--chatgpt-amber) / 0.25) 0%,
+        hsl(var(--chatgpt-amber) / 0.15) 30%,
+        hsl(var(--chatgpt-amber) / 0.06) 60%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        hsl(var(--chatgpt-amber) / 0.1) 0%,
+        transparent 80%
+      );
+  }
+
+  .weapon-wall {
+    background-image: radial-gradient(
+      circle,
+      hsl(var(--text-muted) / 0.06) 1px,
+      transparent 1px
     );
+    background-size: 24px 24px;
+    box-shadow: inset 0 2px 20px hsl(var(--night-ops) / 0.6);
+  }
+
+  .weapon-mount {
+    position: relative;
+  }
+
+  .weapon-mount::before,
+  .weapon-mount::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    width: 12px;
+    height: 2px;
+    background: hsl(var(--copper) / 0.25);
+    border-radius: 1px;
+  }
+
+  .weapon-mount::before {
+    left: 8px;
+  }
+
+  .weapon-mount::after {
+    right: 8px;
+  }
+
+  .classified-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: hsl(var(--copper) / 0.04);
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
   }
 }
 

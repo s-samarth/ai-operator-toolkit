@@ -66,7 +66,9 @@ const MissionLoadouts = () => {
               className="w-full text-left"
             >
               <div className={`card-tactical p-5 sm:p-6 h-full relative overflow-hidden transition-all duration-300 ${activeId === m.id ? "border-copper glow-copper" : ""}`}>
-                {/* Classified stamp */}
+                {/* CLASSIFIED watermark */}
+                <span className="classified-watermark">CLASSIFIED</span>
+                {/* Classification stamp */}
                 <div className={`classified-stamp absolute top-4 right-4 text-[9px] ${m.stampColor}`}>
                   {m.stamp}
                 </div>

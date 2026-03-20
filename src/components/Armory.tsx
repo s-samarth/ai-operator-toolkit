@@ -117,33 +117,41 @@ const Armory = () => {
         </p>
       </ScrollReveal>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8">
-        {items.map((item, i) => {
-          const Icon = item.icon;
-          const isActive = activeId === item.id;
-          return (
-            <ScrollReveal key={item.id} delay={i * 0.05}>
-              <button
-                onClick={() => handleClick(item.id)}
-                className={`w-full p-4 sm:p-6 rounded-lg border transition-all duration-300 text-left group cursor-pointer ${
-                  isActive
-                    ? "bg-surface-elevated border-copper glow-copper scale-[1.03]"
-                    : "bg-background border-border hover:bg-surface-elevated hover:border-copper/50 hover:scale-[1.02]"
-                }`}
-              >
-                <Icon
-                  className={`w-8 h-8 sm:w-10 sm:h-10 mb-3 transition-colors ${
-                    isActive ? "text-copper" : "text-muted-custom group-hover:text-copper"
+      <div className="weapon-wall rounded-xl p-4 sm:p-6 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          {items.map((item, i) => {
+            const Icon = item.icon;
+            const isActive = activeId === item.id;
+            return (
+              <ScrollReveal key={item.id} delay={i * 0.05}>
+                <button
+                  onClick={() => handleClick(item.id)}
+                  className={`weapon-mount w-full p-4 sm:p-6 rounded-lg border transition-all duration-300 text-left group cursor-pointer ${
+                    isActive
+                      ? "bg-surface-elevated border-copper glow-copper scale-[1.03]"
+                      : "bg-background border-border hover:bg-surface-elevated hover:border-copper/50 hover:scale-[1.04] hover:-rotate-1"
                   }`}
-                />
-                <p className="font-heading text-xs sm:text-sm tracking-wider uppercase text-bright font-semibold">
-                  {item.label}
-                </p>
-                <p className="font-mono text-[10px] text-muted-custom mt-1">{item.sublabel}</p>
-              </button>
-            </ScrollReveal>
-          );
-        })}
+                  style={{ borderBottom: isActive ? "2px solid hsl(24 58% 60% / 0.5)" : undefined }}
+                >
+                  <Icon
+                    className={`w-8 h-8 sm:w-10 sm:h-10 mb-3 transition-all ${
+                      isActive ? "text-copper" : "text-muted-custom group-hover:text-copper"
+                    }`}
+                    style={
+                      isActive
+                        ? { filter: "drop-shadow(0 0 6px hsl(24 58% 60% / 0.4))" }
+                        : undefined
+                    }
+                  />
+                  <p className="font-heading text-xs sm:text-sm tracking-wider uppercase text-bright font-semibold">
+                    {item.label}
+                  </p>
+                  <p className="font-mono text-[10px] text-muted-custom mt-1">{item.sublabel}</p>
+                </button>
+              </ScrollReveal>
+            );
+          })}
+        </div>
       </div>
 
       <AnimatePresence mode="wait">

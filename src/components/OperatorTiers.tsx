@@ -2,7 +2,21 @@ import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import SectionWrapper from "./SectionWrapper";
 
-const tiers = [
+interface Tier {
+  name: string;
+  plan: string;
+  subtitle: string;
+  ammo: number;
+  arsenal: number;
+  description: string;
+  intensity: string;
+  borderColor: string;
+  accentColor: string;
+  recommended?: boolean;
+  glowStyle?: React.CSSProperties;
+}
+
+const tiers: Tier[] = [
   {
     name: "CIVILIAN VOLUNTEER",
     plan: "Free Plan",
@@ -10,7 +24,7 @@ const tiers = [
     ammo: 8,
     arsenal: 30,
     description: "Two magazines, no body armor, restricted areas. Can learn the basics. Can't run real operations. You'll feel the limits within minutes.",
-    intensity: "opacity-50",
+    intensity: "opacity-50 grayscale",
     borderColor: "border-border",
     accentColor: "text-muted-custom",
   },
@@ -33,7 +47,7 @@ const tiers = [
     ammo: 75,
     arsenal: 90,
     description: "5x the ammo. Extended Opus access — sustained heavy fire instead of controlled bursts. Same gear, more sustained firepower.",
-    intensity: "",
+    intensity: "ring-1 ring-chatgpt-amber/20",
     borderColor: "border-chatgpt-amber",
     accentColor: "text-chatgpt-amber",
   },
@@ -44,9 +58,10 @@ const tiers = [
     ammo: 100,
     arsenal: 100,
     description: "20x ammo. Full-auto Opus all day. Raw firepower without resource constraints. But the backpack is still the same size — 200K tokens for everyone.",
-    intensity: "",
+    intensity: "ring-2 ring-destructive/30",
     borderColor: "border-destructive",
     accentColor: "text-destructive",
+    glowStyle: { boxShadow: "0 0 30px -5px rgba(239, 68, 68, 0.25)" },
   },
 ];
 
@@ -81,10 +96,14 @@ const OperatorTiers = () => (
       {tiers.map((tier, i) => (
         <ScrollReveal key={tier.name} delay={i * 0.1}>
           <motion.div
-            className={`relative card-tactical p-5 sm:p-6 h-full ${tier.borderColor} ${tier.intensity}`}
+            className={`relative card-tactical p-5 sm:p-6 h-full ${tier.borderColor} ${tier.intensity} overflow-hidden`}
             whileHover={{ scale: 1.03, y: -4 }}
             transition={{ duration: 0.3 }}
+            style={tier.glowStyle}
           >
+            {tier.glowStyle && (
+              <div className="absolute inset-0 bg-gradient-to-t from-destructive/5 to-transparent pointer-events-none" />
+            )}
             {tier.recommended && (
               <div className="absolute -top-3 left-4 px-3 py-0.5 bg-copper text-primary-foreground font-mono text-[10px] tracking-wider rounded-sm font-bold">
                 RECOMMENDED
