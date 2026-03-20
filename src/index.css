@@ -1,96 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 216 30% 5%;
+    --foreground: 210 25% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 215 25% 10%;
+    --card-foreground: 210 25% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 215 25% 10%;
+    --popover-foreground: 210 25% 90%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 25 55% 60%;
+    --primary-foreground: 216 30% 5%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 20% 15%;
+    --secondary-foreground: 210 25% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 20% 15%;
+    --muted-foreground: 213 15% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 228 100% 71%;
+    --accent-foreground: 216 30% 5%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 20% 18%;
+    --input: 215 20% 18%;
+    --ring: 25 55% 60%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Custom tokens */
+    --copper: 25 55% 60%;
+    --copper-glow: 25 55% 60%;
+    --claude-blue: 228 100% 71%;
+    --google-green: 145 65% 58%;
+    --chatgpt-amber: 43 96% 56%;
+    --danger: 0 84% 60%;
+    --surface: 215 25% 10%;
+    --surface-elevated: 215 22% 16%;
+    --text-bright: 213 33% 96%;
+    --text-body: 210 25% 85%;
+    --text-muted: 213 15% 55%;
+    --night-ops: 216 30% 5%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --font-heading: 'Barlow Condensed', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --shadow-copper: 0 0 30px -5px hsl(25 55% 60% / 0.3);
+    --shadow-blue: 0 0 30px -5px hsl(228 100% 71% / 0.3);
+    --shadow-green: 0 0 30px -5px hsl(145 65% 58% / 0.3);
+    --shadow-amber: 0 0 30px -5px hsl(43 96% 56% / 0.3);
   }
 }
 
@@ -101,5 +68,198 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  code, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .heading-stencil {
+    font-family: var(--font-heading);
+    @apply uppercase tracking-[0.15em] font-bold;
+    color: hsl(var(--text-bright));
+  }
+
+  .label-mono {
+    font-family: var(--font-mono);
+    @apply text-xs tracking-wider uppercase;
+    color: hsl(var(--text-muted));
+  }
+
+  .card-tactical {
+    background: hsl(var(--surface));
+    border: 1px solid hsl(var(--border));
+    @apply rounded-lg transition-all duration-300;
+  }
+
+  .card-tactical:hover {
+    background: hsl(var(--surface-elevated));
+    box-shadow: var(--shadow-copper);
+    @apply scale-[1.02];
+  }
+
+  .glow-copper {
+    box-shadow: var(--shadow-copper);
+  }
+
+  .glow-blue {
+    box-shadow: var(--shadow-blue);
+  }
+
+  .glow-green {
+    box-shadow: var(--shadow-green);
+  }
+
+  .glow-amber {
+    box-shadow: var(--shadow-amber);
+  }
+
+  .scan-lines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--text-muted) / 0.03) 2px,
+      hsl(var(--text-muted) / 0.03) 4px
+    );
+  }
+
+  .topo-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M200 50 Q250 100 200 150 Q150 200 200 250 Q250 300 200 350' fill='none' stroke='%237A8BA0' stroke-width='0.5' opacity='0.05'/%3E%3Cpath d='M100 0 Q150 80 100 160 Q50 240 100 320 Q150 400 100 400' fill='none' stroke='%237A8BA0' stroke-width='0.5' opacity='0.04'/%3E%3Cpath d='M300 0 Q350 80 300 160 Q250 240 300 320 Q350 400 300 400' fill='none' stroke='%237A8BA0' stroke-width='0.5' opacity='0.04'/%3E%3Ccircle cx='200' cy='200' r='80' fill='none' stroke='%237A8BA0' stroke-width='0.3' opacity='0.03'/%3E%3Ccircle cx='200' cy='200' r='120' fill='none' stroke='%237A8BA0' stroke-width='0.3' opacity='0.03'/%3E%3Ccircle cx='200' cy='200' r='160' fill='none' stroke='%237A8BA0' stroke-width='0.3' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .vignette {
+    box-shadow: inset 0 0 150px 50px hsl(var(--night-ops));
+  }
+
+  .crosshair-line {
+    @apply relative;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--copper) / 0.3) 20%,
+      hsl(var(--copper)) 50%,
+      hsl(var(--copper) / 0.3) 80%,
+      transparent 100%
+    );
+    height: 1px;
+  }
+
+  .crosshair-line::before,
+  .crosshair-line::after {
+    content: '';
+    @apply absolute top-1/2 -translate-y-1/2 w-2 h-2 border rounded-full;
+    border-color: hsl(var(--copper));
+  }
+
+  .crosshair-line::before {
+    left: calc(50% - 6px);
+  }
+
+  .crosshair-line::after {
+    right: calc(50% - 6px);
+  }
+
+  .gauge-segment {
+    @apply relative h-8 rounded-sm;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .classified-stamp {
+    font-family: var(--font-heading);
+    @apply uppercase tracking-[0.2em] text-xs font-bold px-3 py-1 border rounded;
+    transform: rotate(-3deg);
+    opacity: 0.7;
+  }
+
+  .flashlight-beam {
+    background: radial-gradient(
+      ellipse at top center,
+      hsl(var(--chatgpt-amber) / 0.15) 0%,
+      hsl(var(--chatgpt-amber) / 0.08) 30%,
+      hsl(var(--chatgpt-amber) / 0.02) 60%,
+      transparent 100%
+    );
+  }
+}
+
+@layer utilities {
+  .text-copper {
+    color: hsl(var(--copper));
+  }
+
+  .text-claude-blue {
+    color: hsl(var(--claude-blue));
+  }
+
+  .text-google-green {
+    color: hsl(var(--google-green));
+  }
+
+  .text-chatgpt-amber {
+    color: hsl(var(--chatgpt-amber));
+  }
+
+  .text-bright {
+    color: hsl(var(--text-bright));
+  }
+
+  .text-body-custom {
+    color: hsl(var(--text-body));
+  }
+
+  .text-muted-custom {
+    color: hsl(var(--text-muted));
+  }
+
+  .bg-night-ops {
+    background-color: hsl(var(--night-ops));
+  }
+
+  .bg-surface {
+    background-color: hsl(var(--surface));
+  }
+
+  .bg-surface-elevated {
+    background-color: hsl(var(--surface-elevated));
+  }
+
+  .border-copper {
+    border-color: hsl(var(--copper));
+  }
+
+  .border-claude-blue {
+    border-color: hsl(var(--claude-blue));
+  }
+
+  .border-google-green {
+    border-color: hsl(var(--google-green));
+  }
+
+  .border-chatgpt-amber {
+    border-color: hsl(var(--chatgpt-amber));
+  }
+
+  .bg-copper {
+    background-color: hsl(var(--copper));
+  }
+
+  .bg-claude-blue {
+    background-color: hsl(var(--claude-blue));
+  }
+
+  .bg-google-green {
+    background-color: hsl(var(--google-green));
+  }
+
+  .bg-chatgpt-amber {
+    background-color: hsl(var(--chatgpt-amber));
   }
 }
